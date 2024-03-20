@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="appContainer">
+      <h1 class="appTitle">Shopping List</h1>
+      <div class="formContainer">
+        <form action="">
+          <input
+            type="text"
+            class="inputComponent"
+            id="addItem"
+            placeholder="add item"
+          />
+          <button type="submit" class="addItemButton">Add Item</button>
+        </form>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="inputComponent"
+          id="filterItems"
+          placeholder="search items"
+        />
+        <button class="searchItem">search</button>
+      </div>
+      <div class="itemDisplayContainer">
+        <ul class="itemsList">
+          <li class="shoppingItem">No Items</li>
+        </ul>
+      </div>
+      <button class="clearItems">Delete All</button>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
