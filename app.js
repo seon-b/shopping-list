@@ -1,9 +1,8 @@
 let addItemButton = document.querySelector(".addItemButton");
-let searchButton = document.querySelector(".searchButton");
 let deleteAllButton = document.querySelector(".clearItems");
 
 let itemInputComponent = document.querySelector("#addItem");
-let searchItemInputComponent = document.querySelector("#filterItems");
+let filterInputComponent = document.querySelector("#filterItems");
 let itemsList = document.querySelector(".itemsList");
 
 let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
@@ -107,13 +106,11 @@ const filterItems = (e) => {
 
 const checkAppState = () => {
   if (appState.itemsListLength === 0) {
-    searchItemInputComponent.classList.add("hideComponent");
+    filterInputComponent.classList.add("hideComponent");
     deleteAllButton.classList.add("hideComponent");
-    searchButton.classList.add("hideComponent");
   } else {
-    searchItemInputComponent.classList.remove("hideComponent");
+    filterInputComponent.classList.remove("hideComponent");
     deleteAllButton.classList.remove("hideComponent");
-    searchButton.classList.remove("hideComponent");
   }
 };
 
@@ -121,6 +118,6 @@ addItemButton.addEventListener("click", addItemToList);
 itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
-searchItemInputComponent.addEventListener("input", filterItems);
+filterInputComponent.addEventListener("input", filterItems);
 
 checkAppState();
