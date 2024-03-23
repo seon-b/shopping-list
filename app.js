@@ -66,8 +66,10 @@ const addItemToListByKeyBoard = (e) => {
     newItem.appendChild(createItemIcon(removeItemIconClasses));
     newItem.classList.add("shoppingItem");
     itemsList.appendChild(newItem);
+
     setAppState("itemsListLength", getCurrentItemsListLength());
     checkAppState();
+
     itemInputComponent.value = "";
   }
 };
@@ -91,6 +93,18 @@ const deleteAllItems = () => {
   checkAppState();
 };
 
+const filterItems = (e) => {
+  let inputData = e.target.value.toLowerCase();
+  let currentItemsList = document.querySelectorAll("li");
+
+  currentItemsList.forEach((item) => {
+    let itemName = item.firstChild.textContent.toLowerCase();
+    itemName.indexOf(inputData) !== -1
+      ? (item.style.display = "block")
+      : (item.style.display = "none");
+  });
+};
+
 const checkAppState = () => {
   if (appState.itemsListLength === 0) {
     searchItemInputComponent.classList.add("hideComponent");
@@ -107,5 +121,6 @@ addItemButton.addEventListener("click", addItemToList);
 itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
+searchItemInputComponent.addEventListener("input", filterItems);
 
 checkAppState();
