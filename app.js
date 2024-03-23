@@ -34,6 +34,24 @@ const addItemToList = () => {
   itemInputComponent.value = "";
 };
 
+const addItemToListByKeyBoard = (e) => {
+  if (e.key === "Enter") {
+    if (itemInputComponent.value.length === 0) {
+      alert("Error, Please enter an item");
+      return;
+    }
+
+    let newItem = document.createElement("li");
+    let newItemName = document.createTextNode(itemInputComponent.value);
+
+    newItem.appendChild(newItemName);
+    newItem.appendChild(createItemIcon(removeItemIconClasses));
+    newItem.classList.add("shoppingItem");
+    itemsList.appendChild(newItem);
+    itemInputComponent.value = "";
+  }
+};
+
 const removeItemFromList = (e) => {};
 
 const deleteAllItems = () => {
@@ -43,5 +61,6 @@ const deleteAllItems = () => {
 };
 
 addItemButton.addEventListener("click", addItemToList);
+itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
