@@ -1,4 +1,8 @@
+.itemsList {
+  list-style-type: none;
+}
+
 .removeItemIconStyle {
-  font-size: 1em;
+  font-size: 0.75em;
   border: 1px solid;
 }

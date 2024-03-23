@@ -34,9 +34,14 @@ const addItemToList = () => {
   itemInputComponent.value = "";
 };
 
-const removeItemFromList = (e) => {
-  e.target.remove();
+const removeItemFromList = (e) => {};
+
+const deleteAllItems = () => {
+  while (itemsList.lastElementChild) {
+    itemsList.removeChild(itemsList.lastElementChild);
+  }
 };
 
 addItemButton.addEventListener("click", addItemToList);
 itemsList.addEventListener("click", removeItemFromList);
+deleteAllButton.addEventListener("click", deleteAllItems);
