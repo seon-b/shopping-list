@@ -8,8 +8,12 @@ let itemsList = document.querySelector(".itemsList");
 
 let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
 
+const getCurrentItemsListLength = () => {
+  return itemsList.querySelectorAll("li").length;
+};
+
 const appState = {
-  itemsListLength: itemsList.querySelectorAll("li").length,
+  itemsListLength: getCurrentItemsListLength(),
 };
 
 const setAppState = (appStateKey, newValue) => {
@@ -43,7 +47,7 @@ const addItemToList = () => {
   newItem.appendChild(createItemIcon(removeItemIconClasses));
   newItem.classList.add("shoppingItem");
   itemsList.appendChild(newItem);
-  setAppState("itemsListLength", itemsList.querySelectorAll("li").length);
+  setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
   itemInputComponent.value = "";
 };
@@ -62,7 +66,7 @@ const addItemToListByKeyBoard = (e) => {
     newItem.appendChild(createItemIcon(removeItemIconClasses));
     newItem.classList.add("shoppingItem");
     itemsList.appendChild(newItem);
-    setAppState("itemsListLength", itemsList.querySelectorAll("li").length);
+    setAppState("itemsListLength", getCurrentItemsListLength());
     checkAppState();
     itemInputComponent.value = "";
   }
@@ -71,12 +75,16 @@ const addItemToListByKeyBoard = (e) => {
 const removeItemFromList = (e) => {
   if (e.target.parentElement.classList.contains("shoppingItem"))
     e.target.parentElement.remove();
+  setAppState("itemsListLength", getCurrentItemsListLength());
+  checkAppState();
 };
 
 const deleteAllItems = () => {
   while (itemsList.lastElementChild) {
     itemsList.removeChild(itemsList.lastElementChild);
   }
+  setAppState("itemsListLength", getCurrentItemsListLength());
+  checkAppState();
 };
 
 const checkAppState = () => {
@@ -85,9 +93,9 @@ const checkAppState = () => {
     deleteAllButton.classList.add("hideComponent");
     searchButton.classList.add("hideComponent");
   } else {
-    searchItemInputComponent.classList.add("displayComponent");
-    deleteAllButton.classList.add("displayComponent");
-    searchButton.classList.add("displayComponent");
+    searchItemInputComponent.classList.remove("hideComponent");
+    deleteAllButton.classList.remove("hideComponent");
+    searchButton.classList.remove("hideComponent");
   }
 };
 
