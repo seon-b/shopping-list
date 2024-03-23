@@ -73,15 +73,19 @@ const addItemToListByKeyBoard = (e) => {
 };
 
 const removeItemFromList = (e) => {
-  if (e.target.parentElement.classList.contains("shoppingItem"))
-    e.target.parentElement.remove();
+  if (e.target.parentElement.classList.contains("shoppingItem")) {
+    if (confirm("Selected item will be deleted"))
+      e.target.parentElement.remove();
+  }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
 };
 
 const deleteAllItems = () => {
-  while (itemsList.lastElementChild) {
-    itemsList.removeChild(itemsList.lastElementChild);
+  if (confirm("All items will be deleted")) {
+    while (itemsList.lastElementChild) {
+      itemsList.removeChild(itemsList.lastElementChild);
+    }
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
