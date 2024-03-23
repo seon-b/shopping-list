@@ -52,7 +52,10 @@ const addItemToListByKeyBoard = (e) => {
   }
 };
 
-const removeItemFromList = (e) => {};
+const removeItemFromList = (e) => {
+  if (e.target.parentElement.classList.contains("shoppingItem"))
+    e.target.parentElement.remove();
+};
 
 const deleteAllItems = () => {
   while (itemsList.lastElementChild) {
