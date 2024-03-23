@@ -8,6 +8,18 @@ let itemsList = document.querySelector(".itemsList");
 
 let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
 
+const appState = {
+  itemsListLength: itemsList.querySelectorAll("li").length,
+};
+
+const setAppState = (appStateKey, newValue) => {
+  switch (true) {
+    case appStateKey === "itemsListLength":
+      appState.itemsListLength = newValue;
+    default:
+  }
+};
+
 const createItemIcon = (iconClasses) => {
   let newItemIcon = document.createElement("span");
   let newItemIconName = document.createTextNode("close");
@@ -31,6 +43,8 @@ const addItemToList = () => {
   newItem.appendChild(createItemIcon(removeItemIconClasses));
   newItem.classList.add("shoppingItem");
   itemsList.appendChild(newItem);
+  setAppState("itemsListLength", itemsList.querySelectorAll("li").length);
+  checkAppState();
   itemInputComponent.value = "";
 };
 
@@ -48,6 +62,8 @@ const addItemToListByKeyBoard = (e) => {
     newItem.appendChild(createItemIcon(removeItemIconClasses));
     newItem.classList.add("shoppingItem");
     itemsList.appendChild(newItem);
+    setAppState("itemsListLength", itemsList.querySelectorAll("li").length);
+    checkAppState();
     itemInputComponent.value = "";
   }
 };
@@ -63,7 +79,21 @@ const deleteAllItems = () => {
   }
 };
 
+const checkAppState = () => {
+  if (appState.itemsListLength === 0) {
+    searchItemInputComponent.classList.add("hideComponent");
+    deleteAllButton.classList.add("hideComponent");
+    searchButton.classList.add("hideComponent");
+  } else {
+    searchItemInputComponent.classList.add("displayComponent");
+    deleteAllButton.classList.add("displayComponent");
+    searchButton.classList.add("displayComponent");
+  }
+};
+
 addItemButton.addEventListener("click", addItemToList);
 itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
+
+checkAppState();
