@@ -6,3 +6,11 @@
   font-size: 0.75em;
   border: 1px solid;
 }
+
+.hideComponent {
+  display: none;
+}
+
+.displayComponent {
+  display: block;
+}
