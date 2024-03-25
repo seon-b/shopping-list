@@ -46,6 +46,8 @@ const addItemToList = () => {
   newItem.appendChild(createItemIcon(removeItemIconClasses));
   newItem.classList.add("shoppingItem");
   itemsList.appendChild(newItem);
+
+  saveItemToStorage(itemInputComponent.value);
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
   itemInputComponent.value = "";
@@ -66,6 +68,7 @@ const addItemToListByKeyBoard = (e) => {
     newItem.classList.add("shoppingItem");
     itemsList.appendChild(newItem);
 
+    saveItemToStorage(itemInputComponent.value);
     setAppState("itemsListLength", getCurrentItemsListLength());
     checkAppState();
 
@@ -102,6 +105,16 @@ const filterItems = (e) => {
       ? (item.style.display = "block")
       : (item.style.display = "none");
   });
+};
+
+const saveItemToStorage = (item) => {
+  let itemsData = [];
+  localStorage.getItem("itemsData") !== null
+    ? (itemsData = JSON.parse(localStorage.getItem("itemsData")))
+    : (itemsData = []);
+
+  itemsData.push(item);
+  localStorage.setItem("itemsData", JSON.stringify(itemsData));
 };
 
 const checkAppState = () => {
