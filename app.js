@@ -7,6 +7,23 @@ let itemsList = document.querySelector(".itemsList");
 
 let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
 
+const generateItemsList = () => {
+  itemsData = getItemsFromStorage();
+  itemsData.reverse();
+
+  while (itemsData.length !== 0) {
+    let newItem = document.createElement("li");
+    let newItemName = document.createTextNode(itemsData.pop());
+
+    newItem.appendChild(newItemName);
+    newItem.appendChild(createItemIcon(removeItemIconClasses));
+    newItem.classList.add("shoppingItem");
+    itemsList.appendChild(newItem);
+  }
+  setAppState("itemsListLength", getCurrentItemsListLength());
+  checkAppState();
+};
+
 const getCurrentItemsListLength = () => {
   return itemsList.querySelectorAll("li").length;
 };
@@ -76,6 +93,22 @@ const addItemToListByKeyBoard = (e) => {
   }
 };
 
+const getItemsFromStorage = () => {
+  let itemsData = [];
+  localStorage.getItem("itemsData") !== null
+    ? (itemsData = JSON.parse(localStorage.getItem("itemsData")))
+    : (itemsData = []);
+
+  return itemsData;
+};
+
+const saveItemToStorage = (item) => {
+  let itemsData = getItemsFromStorage();
+
+  itemsData.push(item);
+  localStorage.setItem("itemsData", JSON.stringify(itemsData));
+};
+
 const removeItemFromList = (e) => {
   if (e.target.parentElement.classList.contains("shoppingItem")) {
     if (confirm("Selected item will be deleted"))
@@ -107,16 +140,6 @@ const filterItems = (e) => {
   });
 };
 
-const saveItemToStorage = (item) => {
-  let itemsData = [];
-  localStorage.getItem("itemsData") !== null
-    ? (itemsData = JSON.parse(localStorage.getItem("itemsData")))
-    : (itemsData = []);
-
-  itemsData.push(item);
-  localStorage.setItem("itemsData", JSON.stringify(itemsData));
-};
-
 const checkAppState = () => {
   if (appState.itemsListLength === 0) {
     filterInputComponent.classList.add("hideComponent");
@@ -132,5 +155,6 @@ itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
 filterInputComponent.addEventListener("input", filterItems);
+document.addEventListener("DOMContentLoaded", generateItemsList);
 
 checkAppState();
