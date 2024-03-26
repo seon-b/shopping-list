@@ -8,7 +8,7 @@ let itemsList = document.querySelector(".itemsList");
 let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
 
 const generateItemsList = () => {
-  itemsData = getItemsFromStorage();
+  let itemsData = getItemsFromStorage();
   itemsData.reverse();
 
   while (itemsData.length !== 0) {
@@ -22,6 +22,20 @@ const generateItemsList = () => {
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
+};
+
+const removeItemFromStorage = (itemName, value) => {
+  let itemsData = getItemsFromStorage();
+
+  if (value === "one") {
+    itemsData.splice(itemsData.indexOf(itemName), 1);
+    localStorage.setItem("itemsData", JSON.stringify(itemsData));
+  } else {
+    while (itemsData.length !== 0) {
+      itemsData.pop();
+    }
+    localStorage.setItem("itemsData", JSON.stringify(itemsData));
+  }
 };
 
 const getCurrentItemsListLength = () => {
@@ -113,6 +127,11 @@ const removeItemFromList = (e) => {
   if (e.target.parentElement.classList.contains("shoppingItem")) {
     if (confirm("Selected item will be deleted"))
       e.target.parentElement.remove();
+
+    let itemToRemove = e.target.parentElement.textContent;
+    itemToRemove = itemToRemove.replace("close", "");
+
+    removeItemFromStorage(itemToRemove, "one");
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
@@ -123,6 +142,7 @@ const deleteAllItems = () => {
     while (itemsList.lastElementChild) {
       itemsList.removeChild(itemsList.lastElementChild);
     }
+    removeItemFromStorage("all items", "all");
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
