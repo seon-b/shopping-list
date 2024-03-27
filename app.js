@@ -142,7 +142,7 @@ const deleteAllItems = () => {
     while (itemsList.lastElementChild) {
       itemsList.removeChild(itemsList.lastElementChild);
     }
-    removeItemFromStorage("all items", "all");
+    removeItemFromStorage("items", "all");
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();

@@ -1,5 +1,25 @@
+.appContainer {
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.displayComponent {
+  display: block;
+}
+
+.hideComponent {
+  display: none;
+}
+
 .itemsList {
   list-style-type: none;
+  cursor: pointer;
+}
+
+.itemDisplayContainer {
+  width: 50%;
 }
 
 .removeItemIconStyle {
@@ -7,10 +27,5 @@
   border: 1px solid;
 }
 
-.hideComponent {
-  display: none;
-}
-
-.displayComponent {
-  display: block;
+.shoppingItem {
 }
