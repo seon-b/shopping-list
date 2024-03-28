@@ -1,4 +1,5 @@
 let addItemButton = document.querySelector(".addItemButton");
+let editItemButton = document.querySelector(".editItemButton");
 let deleteAllButton = document.querySelector(".clearItems");
 
 let itemInputComponent = document.querySelector("#addItem");
@@ -44,12 +45,15 @@ const getCurrentItemsListLength = () => {
 
 const appState = {
   itemsListLength: getCurrentItemsListLength(),
+  selectedItem: "",
 };
 
 const setAppState = (appStateKey, newValue) => {
   switch (true) {
     case appStateKey === "itemsListLength":
       appState.itemsListLength = newValue;
+    case appStateKey === "selectedItem":
+      appState.selectedItem = itemInputComponent.value;
     default:
   }
 };
@@ -125,16 +129,30 @@ const saveItemToStorage = (item) => {
 
 const removeItemFromList = (e) => {
   if (e.target.parentElement.classList.contains("shoppingItem")) {
-    if (confirm("Selected item will be deleted"))
+    if (confirm("Selected item will be deleted")) {
       e.target.parentElement.remove();
 
-    let itemToRemove = e.target.parentElement.textContent;
-    itemToRemove = itemToRemove.replace("close", "");
+      let itemToRemove = e.target.parentElement.textContent;
+      itemToRemove = itemToRemove.replace("close", "");
 
-    removeItemFromStorage(itemToRemove, "one");
+      removeItemFromStorage(itemToRemove, "one");
+    }
+  } else {
+    let itemToEdit = e.target.textContent;
+    itemToEdit = itemToEdit.replace("close", "");
+    itemInputComponent.value = itemToEdit;
+    setAppState("selectedItem", itemToEdit);
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
+};
+
+const editItem = () => {
+  let newItemName = itemInputComponent.value;
+  let itemsData = getItemsFromStorage();
+  itemsData.splice(itemsData.indexOf(appState.selectedItem), 1, newItemName);
+  localStorage.setItem("itemsData", JSON.stringify(itemsData));
+  itemInputComponent.value = "";
 };
 
 const deleteAllItems = () => {
@@ -171,6 +189,7 @@ const checkAppState = () => {
 };
 
 addItemButton.addEventListener("click", addItemToList);
+editItemButton.addEventListener("click", editItem);
 itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
