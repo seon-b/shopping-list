@@ -94,20 +94,23 @@ const addItemToListByKeyBoard = (e) => {
       alert("Error, Please enter an item");
       return;
     }
+    if (editItemButton.classList.contains("hideComponent")) {
+      let newItem = document.createElement("li");
+      let newItemName = document.createTextNode(itemInputComponent.value);
 
-    let newItem = document.createElement("li");
-    let newItemName = document.createTextNode(itemInputComponent.value);
+      newItem.appendChild(newItemName);
+      newItem.appendChild(createItemIcon(removeItemIconClasses));
+      newItem.classList.add("shoppingItem");
+      itemsList.appendChild(newItem);
 
-    newItem.appendChild(newItemName);
-    newItem.appendChild(createItemIcon(removeItemIconClasses));
-    newItem.classList.add("shoppingItem");
-    itemsList.appendChild(newItem);
+      saveItemToStorage(itemInputComponent.value);
+      setAppState("itemsListLength", getCurrentItemsListLength());
+      checkAppState();
 
-    saveItemToStorage(itemInputComponent.value);
-    setAppState("itemsListLength", getCurrentItemsListLength());
-    checkAppState();
-
-    itemInputComponent.value = "";
+      itemInputComponent.value = "";
+    } else {
+      editItem();
+    }
   }
 };
 
@@ -138,6 +141,8 @@ const removeItemFromList = (e) => {
       removeItemFromStorage(itemToRemove, "one");
     }
   } else {
+    addItemButton.classList.add("hideComponent");
+    editItemButton.classList.remove("hideComponent");
     let itemToEdit = e.target.textContent;
     itemToEdit = itemToEdit.replace("close", "");
     itemInputComponent.value = itemToEdit;
@@ -148,11 +153,18 @@ const removeItemFromList = (e) => {
 };
 
 const editItem = () => {
-  let newItemName = itemInputComponent.value;
-  let itemsData = getItemsFromStorage();
-  itemsData.splice(itemsData.indexOf(appState.selectedItem), 1, newItemName);
-  localStorage.setItem("itemsData", JSON.stringify(itemsData));
-  itemInputComponent.value = "";
+  if (itemInputComponent.value.length === 0) {
+    alert("Error, Item cannot be updated");
+    return;
+  }
+  if (confirm("Selected item will be updated")) {
+    let newItemName = itemInputComponent.value;
+    let itemsData = getItemsFromStorage();
+    itemsData.splice(itemsData.indexOf(appState.selectedItem), 1, newItemName);
+    localStorage.setItem("itemsData", JSON.stringify(itemsData));
+    itemInputComponent.value = "";
+    window.location.reload();
+  }
 };
 
 const deleteAllItems = () => {
@@ -164,6 +176,12 @@ const deleteAllItems = () => {
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
+};
+
+const resetInput = () => {
+  itemInputComponent.value = "";
+  addItemButton.classList.remove("hideComponent");
+  editItemButton.classList.add("hideComponent");
 };
 
 const filterItems = (e) => {
@@ -191,6 +209,7 @@ const checkAppState = () => {
 addItemButton.addEventListener("click", addItemToList);
 editItemButton.addEventListener("click", editItem);
 itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
+// itemInputComponent.addEventListener("click", resetInput);
 itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
 filterInputComponent.addEventListener("input", filterItems);
