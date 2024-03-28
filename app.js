@@ -74,6 +74,11 @@ const addItemToList = () => {
     return;
   }
 
+  if (isDuplicateItem(itemInputComponent.value)) {
+    alert("Item is already in the list");
+    return;
+  }
+
   let newItem = document.createElement("li");
   let newItemName = document.createTextNode(itemInputComponent.value);
 
@@ -92,6 +97,10 @@ const addItemToListByKeyBoard = (e) => {
   if (e.key === "Enter") {
     if (itemInputComponent.value.length === 0) {
       alert("Error, Please enter an item");
+      return;
+    }
+    if (isDuplicateItem(itemInputComponent.value)) {
+      alert("Item is already in the list");
       return;
     }
     if (editItemButton.classList.contains("hideComponent")) {
@@ -194,6 +203,12 @@ const filterItems = (e) => {
       ? (item.style.display = "block")
       : (item.style.display = "none");
   });
+};
+
+isDuplicateItem = (item) => {
+  let itemsData = getItemsFromStorage();
+  itemInputComponent.value = "";
+  return itemsData.includes(item);
 };
 
 const checkAppState = () => {
