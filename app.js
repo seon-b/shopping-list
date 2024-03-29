@@ -90,7 +90,6 @@ const addItemToList = () => {
   saveItemToStorage(itemInputComponent.value);
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
-  console.log(itemInputComponent.value);
   itemInputComponent.value = "";
 };
 
@@ -208,7 +207,6 @@ const filterItems = (e) => {
 
 isDuplicateItem = (item) => {
   let itemsData = getItemsFromStorage();
-  itemInputComponent.value = "";
   return itemsData.includes(item);
 };
 
