@@ -90,6 +90,7 @@ const addItemToList = () => {
   saveItemToStorage(itemInputComponent.value);
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
+  console.log(itemInputComponent.value);
   itemInputComponent.value = "";
 };
 
