@@ -46,6 +46,7 @@ const getCurrentItemsListLength = () => {
 const appState = {
   itemsListLength: getCurrentItemsListLength(),
   selectedItem: "",
+  itemToEdit: "",
 };
 
 const setAppState = (appStateKey, newValue) => {
@@ -54,6 +55,8 @@ const setAppState = (appStateKey, newValue) => {
       appState.itemsListLength = newValue;
     case appStateKey === "selectedItem":
       appState.selectedItem = itemInputComponent.value;
+    case appStateKey === "itemToEdit":
+      appState.itemToEdit = newValue;
     default:
   }
 };
@@ -150,15 +153,40 @@ const removeItemFromList = (e) => {
       removeItemFromStorage(itemToRemove, "one");
     }
   } else {
-    addItemButton.classList.add("hideComponent");
-    editItemButton.classList.remove("hideComponent");
     let itemToEdit = e.target.textContent;
     itemToEdit = itemToEdit.replace("close", "");
     itemInputComponent.value = itemToEdit;
     setAppState("selectedItem", itemToEdit);
+    toggleButtonVisibility(e);
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
+};
+
+const selectOneItemToEdit = (selectedItem) => {
+  let currentItemsList = document.querySelectorAll("li");
+  currentItemsList.forEach((item) => {
+    if (item.textContent !== selectedItem) {
+      item.classList.remove("editItem");
+    }
+  });
+};
+
+const toggleButtonVisibility = (e) => {
+  let selectedItem = e.target;
+
+  setAppState("itemToEdit", selectedItem.textContent.replace("close", ""));
+
+  if (selectedItem.classList.contains("editItem")) {
+    addItemButton.classList.remove("hideComponent");
+    editItemButton.classList.add("hideComponent");
+    selectedItem.classList.remove("editItem");
+  } else {
+    selectOneItemToEdit(selectedItem);
+    addItemButton.classList.add("hideComponent");
+    editItemButton.classList.remove("hideComponent");
+    selectedItem.classList.add("editItem");
+  }
 };
 
 const editItem = () => {
