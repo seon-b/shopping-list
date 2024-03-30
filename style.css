@@ -9,6 +9,9 @@ button:hover {
   display: block;
 }
 
+.editItem {
+  color: #19b519;
+}
 .hideComponent {
   display: none;
 }
