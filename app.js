@@ -152,7 +152,7 @@ const removeItemFromList = (e) => {
 
       removeItemFromStorage(itemToRemove, "one");
     }
-  } else {
+  } else if (e.target.parentElement.classList.contains("itemsList")) {
     let itemToEdit = e.target.textContent;
     itemToEdit = itemToEdit.replace("close", "");
     itemInputComponent.value = itemToEdit;
@@ -250,10 +250,9 @@ const checkAppState = () => {
 
 addItemButton.addEventListener("click", addItemToList);
 editItemButton.addEventListener("click", editItem);
-itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
-// itemInputComponent.addEventListener("click", resetInput);
-itemsList.addEventListener("click", removeItemFromList);
 deleteAllButton.addEventListener("click", deleteAllItems);
+itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
+itemsList.addEventListener("click", removeItemFromList);
 filterInputComponent.addEventListener("input", filterItems);
 document.addEventListener("DOMContentLoaded", generateItemsList);
 
