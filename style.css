@@ -1,6 +1,11 @@
 .appContainer {
 }
+body {
+}
 
+button {
+  border-radius: 5px;
+}
 button:hover {
   cursor: pointer;
 }
@@ -11,6 +16,9 @@ button:hover {
 
 .editItem {
   color: #19b519;
+}
+
+#filterItems {
 }
 .hideComponent {
   display: none;
