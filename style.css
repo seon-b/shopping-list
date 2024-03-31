@@ -1,6 +1,18 @@
 .appContainer {
+  border: black solid 2px;
+  border-radius: 10px;
+  padding: 0.75em;
+  margin: 100px auto;
+  width: 300px;
 }
+
+.appTitle {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+}
+
 body {
+  margin: auto;
 }
 
 button {
@@ -20,6 +32,7 @@ button:hover {
 
 #filterItems {
 }
+
 .hideComponent {
   display: none;
 }
