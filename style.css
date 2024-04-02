@@ -14,7 +14,7 @@
   border-radius: 10px;
   padding: 0.75em;
   margin: 100px auto;
-  max-width: 300px;
+  max-width: 230px;
 }
 
 .appTitle {
@@ -42,7 +42,6 @@ button:hover {
 }
 
 .editItem {
-  margin-top: 5px;
   color: #19b519;
 }
 
