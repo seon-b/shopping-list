@@ -5,7 +5,10 @@
 }
 
 #addItem {
-  margin-bottom: 5px;
+  border: 2px solid black;
+  border-radius: 3px;
+  margin-bottom: 6px;
+  padding: 4px;
   outline: none;
 }
 
@@ -59,6 +62,10 @@ button:hover {
   display: none;
 }
 
+input {
+  width: 100%;
+}
+
 .itemsList {
   border-bottom: 20px;
   cursor: pointer;
@@ -66,7 +73,7 @@ button:hover {
 }
 
 .itemDisplayContainer {
-  width: 50%;
+  width: 100%;
 }
 
 .removeItemIconStyle {
