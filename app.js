@@ -72,25 +72,25 @@ const createItemIcon = (iconClasses) => {
 };
 
 const addItemToList = () => {
-  if (itemInputComponent.value.length === 0) {
+  if (itemInputComponent.value.trim().length === 0) {
     alert("Error, Please enter an item");
     return;
   }
 
-  if (isDuplicateItem(itemInputComponent.value)) {
+  if (isDuplicateItem(itemInputComponent.value.trim())) {
     alert("Item is already in the list");
     return;
   }
 
   let newItem = document.createElement("li");
-  let newItemName = document.createTextNode(itemInputComponent.value);
+  let newItemName = document.createTextNode(itemInputComponent.value.trim());
 
   newItem.appendChild(newItemName);
   newItem.appendChild(createItemIcon(removeItemIconClasses));
   newItem.classList.add("shoppingItem");
   itemsList.appendChild(newItem);
 
-  saveItemToStorage(itemInputComponent.value);
+  saveItemToStorage(itemInputComponent.value.trim());
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
   itemInputComponent.value = "";
@@ -98,17 +98,19 @@ const addItemToList = () => {
 
 const addItemToListByKeyBoard = (e) => {
   if (e.key === "Enter") {
-    if (itemInputComponent.value.length === 0) {
+    if (itemInputComponent.value.trim().length === 0) {
       alert("Error, Please enter an item");
       return;
     }
-    if (isDuplicateItem(itemInputComponent.value)) {
+    if (isDuplicateItem(itemInputComponent.value.trim())) {
       alert("Item is already in the list");
       return;
     }
     if (editItemButton.classList.contains("hideComponent")) {
       let newItem = document.createElement("li");
-      let newItemName = document.createTextNode(itemInputComponent.value);
+      let newItemName = document.createTextNode(
+        itemInputComponent.value.trim()
+      );
 
       newItem.appendChild(newItemName);
       newItem.appendChild(createItemIcon(removeItemIconClasses));
