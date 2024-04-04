@@ -82,4 +82,12 @@ input {
 }
 
 .shoppingItem {
+  align-items: center;
+  border: 2px solid grey;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  padding: 5px;
+  width: 65%;
 }
