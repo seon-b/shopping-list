@@ -71,6 +71,23 @@ const createItemIcon = (iconClasses) => {
   return newItemIcon;
 };
 
+const formatInput = (userInput) => {
+  if (userInput.trim().includes(" ")) {
+    let formatArray = userInput.trim().split(" ");
+    let string1 = formatArray[0];
+    let string2 = formatArray[1];
+
+    let newString1 = string1.replace(string1[0], string1[0].toUpperCase());
+    let newString2 = string2.replace(string2[0], string2[0].toUpperCase());
+
+    return newString1 + " " + newString2;
+  } else {
+    let newString = userInput.trim();
+
+    return newString.replace(newString[0], newString[0].toUpperCase());
+  }
+};
+
 const addItemToList = () => {
   if (itemInputComponent.value.trim().length === 0) {
     alert("Error, Please enter an item");
@@ -83,14 +100,16 @@ const addItemToList = () => {
   }
 
   let newItem = document.createElement("li");
-  let newItemName = document.createTextNode(itemInputComponent.value.trim());
+  let newItemName = document.createTextNode(
+    formatInput(itemInputComponent.value.trim())
+  );
 
   newItem.appendChild(newItemName);
   newItem.appendChild(createItemIcon(removeItemIconClasses));
   newItem.classList.add("shoppingItem");
   itemsList.appendChild(newItem);
 
-  saveItemToStorage(itemInputComponent.value.trim());
+  saveItemToStorage(formatInput(itemInputComponent.value.trim()));
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
   itemInputComponent.value = "";
@@ -109,7 +128,7 @@ const addItemToListByKeyBoard = (e) => {
     if (editItemButton.classList.contains("hideComponent")) {
       let newItem = document.createElement("li");
       let newItemName = document.createTextNode(
-        itemInputComponent.value.trim()
+        formatInput(itemInputComponent.value.trim())
       );
 
       newItem.appendChild(newItemName);
@@ -117,7 +136,7 @@ const addItemToListByKeyBoard = (e) => {
       newItem.classList.add("shoppingItem");
       itemsList.appendChild(newItem);
 
-      saveItemToStorage(itemInputComponent.value);
+      saveItemToStorage(formatInput(itemInputComponent.value));
       setAppState("itemsListLength", getCurrentItemsListLength());
       checkAppState();
 
@@ -197,7 +216,7 @@ const editItem = () => {
     return;
   }
   if (confirm("Selected item will be updated")) {
-    let newItemName = itemInputComponent.value;
+    let newItemName = formatInput(itemInputComponent.value);
     let itemsData = getItemsFromStorage();
     itemsData.splice(itemsData.indexOf(appState.selectedItem), 1, newItemName);
     localStorage.setItem("itemsData", JSON.stringify(itemsData));
