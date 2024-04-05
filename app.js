@@ -73,7 +73,7 @@ const createItemIcon = (iconClasses) => {
 
 const formatInput = (userInput) => {
   if (userInput.trim().includes(" ")) {
-    let formatArray = userInput.trim().split(" ");
+    let formatArray = userInput.trim().toLowerCase().split(" ");
     let string1 = formatArray[0];
     let string2 = formatArray[1];
 
@@ -82,7 +82,7 @@ const formatInput = (userInput) => {
 
     return newString1 + " " + newString2;
   } else {
-    let newString = userInput.trim();
+    let newString = userInput.trim().toLowerCase();
 
     return newString.replace(newString[0], newString[0].toUpperCase());
   }
