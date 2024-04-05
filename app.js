@@ -94,7 +94,7 @@ const addItemToList = () => {
     return;
   }
 
-  if (isDuplicateItem(itemInputComponent.value.trim())) {
+  if (isDuplicateItem(formatInput(itemInputComponent.value.trim()))) {
     alert("Item is already in the list");
     return;
   }
@@ -121,7 +121,7 @@ const addItemToListByKeyBoard = (e) => {
       alert("Error, Please enter an item");
       return;
     }
-    if (isDuplicateItem(itemInputComponent.value.trim())) {
+    if (isDuplicateItem(formatInput(itemInputComponent.value.trim()))) {
       alert("Item is already in the list");
       return;
     }
@@ -256,6 +256,7 @@ const filterItems = (e) => {
 
 isDuplicateItem = (item) => {
   let itemsData = getItemsFromStorage();
+
   return itemsData.includes(item);
 };
 
