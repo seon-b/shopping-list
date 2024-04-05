@@ -74,13 +74,18 @@ const createItemIcon = (iconClasses) => {
 const formatInput = (userInput) => {
   if (userInput.trim().includes(" ")) {
     let formatArray = userInput.trim().toLowerCase().split(" ");
-    let string1 = formatArray[0];
-    let string2 = formatArray[1];
+    let numberOfWords = formatArray.length;
+    let formattedString = "";
 
-    let newString1 = string1.replace(string1[0], string1[0].toUpperCase());
-    let newString2 = string2.replace(string2[0], string2[0].toUpperCase());
+    for (let i = 0; i < numberOfWords; i++) {
+      formattedString +=
+        formatArray[i].replace(
+          formatArray[i][0],
+          formatArray[i][0].toUpperCase()
+        ) + " ";
+    }
 
-    return newString1 + " " + newString2;
+    return formattedString;
   } else {
     let newString = userInput.trim().toLowerCase();
 
@@ -96,6 +101,11 @@ const addItemToList = () => {
 
   if (isDuplicateItem(formatInput(itemInputComponent.value.trim()))) {
     alert("Item is already in the list");
+    return;
+  }
+
+  if (isValidLength(formatInput(itemInputComponent.value.trim())) === false) {
+    alert("Error, item must be less than 20 characters");
     return;
   }
 
@@ -125,6 +135,12 @@ const addItemToListByKeyBoard = (e) => {
       alert("Item is already in the list");
       return;
     }
+
+    if (isValidLength(formatInput(itemInputComponent.value.trim())) === false) {
+      alert("Error, item must be less than 20 characters");
+      return;
+    }
+
     if (editItemButton.classList.contains("hideComponent")) {
       let newItem = document.createElement("li");
       let newItemName = document.createTextNode(
@@ -258,6 +274,10 @@ isDuplicateItem = (item) => {
   let itemsData = getItemsFromStorage();
 
   return itemsData.includes(item);
+};
+
+const isValidLength = (userInput) => {
+  return userInput.length < 20;
 };
 
 const checkAppState = () => {
