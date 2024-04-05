@@ -244,12 +244,12 @@ const resetInput = () => {
 
 const filterItems = (e) => {
   let inputData = e.target.value.toLowerCase();
-  let currentItemsList = document.querySelectorAll("li");
+  let itemsListArray = Array.from(itemsList.querySelectorAll("li"));
 
-  currentItemsList.forEach((item) => {
+  itemsListArray.forEach((item) => {
     let itemName = item.firstChild.textContent.toLowerCase();
     itemName.indexOf(inputData) !== -1
-      ? (item.style.display = "block")
+      ? (item.style.display = "flex")
       : (item.style.display = "none");
   });
 };
