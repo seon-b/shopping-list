@@ -205,6 +205,7 @@ const selectOneItemToEdit = (selectedItem) => {
   currentItemsList.forEach((item) => {
     if (item.textContent !== selectedItem) {
       item.classList.remove("editItem");
+      item.lastElementChild.classList.remove("hideComponent");
     }
   });
 };
