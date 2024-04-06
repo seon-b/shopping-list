@@ -218,11 +218,13 @@ const toggleButtonVisibility = (e) => {
     addItemButton.classList.remove("hideComponent");
     editItemButton.classList.add("hideComponent");
     selectedItem.classList.remove("editItem");
+    selectedItem.lastElementChild.classList.remove("hideComponent");
   } else {
     selectOneItemToEdit(selectedItem);
     addItemButton.classList.add("hideComponent");
     editItemButton.classList.remove("hideComponent");
     selectedItem.classList.add("editItem");
+    selectedItem.lastElementChild.classList.add("hideComponent");
   }
 };
 
