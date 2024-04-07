@@ -45,7 +45,8 @@ button:hover {
 }
 
 .editItem {
-  color: #19b519;
+  background-color: lightgray;
+  color: white;
 }
 
 .formContainer {
@@ -90,4 +91,45 @@ input {
   margin-bottom: 4px;
   padding: 5px;
   width: 100%;
+}
+
+.buttonTheme1 {
+  background-color: #97dffc;
+  color: #ffff;
+}
+
+.buttonTheme2 {
+  background-color: #b892ff;
+  color: #ffff;
+}
+
+.buttonTheme3 {
+  background-color: #ffc2e2;
+  color: #ffff;
+}
+.buttonTheme4 {
+  background-color: #17a5a3;
+  color: #ffff;
+}
+.buttonTheme5 {
+  background-color: #d8315b;
+  color: #ffff;
+}
+
+.backgroundTheme1 {
+  background-color: #fca097;
+}
+
+.backgroundTheme2 {
+  background-color: #fff494;
+}
+
+.backgroundTheme3 {
+  background-color: #d7ffc2;
+}
+.backgroundTheme4 {
+  background-color: #a64417;
+}
+.backgroundTheme5 {
+  background-color: #4dd831;
 }
