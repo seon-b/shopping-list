@@ -1,6 +1,7 @@
 let addItemButton = document.querySelector(".addItemButton");
 let editItemButton = document.querySelector(".editItemButton");
 let deleteAllButton = document.querySelector(".clearItems");
+let themeButton = document.querySelector(".chaneTheme");
 
 let itemInputComponent = document.querySelector("#addItem");
 let filterInputComponent = document.querySelector("#filterItems");
@@ -47,6 +48,7 @@ const appState = {
   itemsListLength: getCurrentItemsListLength(),
   selectedItem: "",
   itemToEdit: "",
+  buttonTheme: "theme1",
 };
 
 const setAppState = (appStateKey, newValue) => {
@@ -57,6 +59,8 @@ const setAppState = (appStateKey, newValue) => {
       appState.selectedItem = itemInputComponent.value;
     case appStateKey === "itemToEdit":
       appState.itemToEdit = newValue;
+    case appStateKey === "buttonTheme":
+      appState.buttonTheme = newValue;
     default:
   }
 };
@@ -293,9 +297,31 @@ const checkAppState = () => {
   }
 };
 
+const changeAppTheme = () => {
+  let themeArray = [
+    {
+      buttonTheme: "buttonTheme1",
+    },
+    {
+      buttonTheme: "buttonTheme2",
+    },
+    {
+      buttonTheme: "buttonTheme3",
+    },
+    {
+      buttonTheme: "buttonTheme4",
+    },
+    {
+      buttonTheme: "buttonTheme5",
+    },
+  ];
+};
+
 addItemButton.addEventListener("click", addItemToList);
 editItemButton.addEventListener("click", editItem);
 deleteAllButton.addEventListener("click", deleteAllItems);
+themeButton.addEventListener("click", changeAppTheme);
+
 itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 filterInputComponent.addEventListener("input", filterItems);
