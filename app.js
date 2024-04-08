@@ -1,7 +1,7 @@
 let addItemButton = document.querySelector(".addItemButton");
 let editItemButton = document.querySelector(".editItemButton");
 let deleteAllButton = document.querySelector(".clearItems");
-let themeButton = document.querySelector(".chaneTheme");
+let themeButton = document.querySelector(".changeTheme");
 
 let itemInputComponent = document.querySelector("#addItem");
 let filterInputComponent = document.querySelector("#filterItems");
@@ -23,6 +23,8 @@ const generateItemsList = () => {
     itemsList.appendChild(newItem);
   }
   setAppState("itemsListLength", getCurrentItemsListLength());
+
+  addThemes();
   checkAppState();
 };
 
@@ -45,23 +47,25 @@ const getCurrentItemsListLength = () => {
 };
 
 const appState = {
+  backgroundTheme: "backgroundTheme1",
+  buttonTheme: "buttonTheme1",
+  itemToEdit: "",
   itemsListLength: getCurrentItemsListLength(),
   selectedItem: "",
-  itemToEdit: "",
-  buttonTheme: "theme1",
 };
 
 const setAppState = (appStateKey, newValue) => {
-  switch (true) {
-    case appStateKey === "itemsListLength":
-      appState.itemsListLength = newValue;
-    case appStateKey === "selectedItem":
-      appState.selectedItem = itemInputComponent.value;
-    case appStateKey === "itemToEdit":
-      appState.itemToEdit = newValue;
-    case appStateKey === "buttonTheme":
-      appState.buttonTheme = newValue;
-    default:
+  if (appStateKey === "backgroundTheme") {
+    appState.backgroundTheme = newValue;
+  } else if (appStateKey === "buttonTheme") {
+    appState.buttonTheme = newValue;
+  } else if (appStateKey === "itemToEdit") {
+    appState.itemToEdit = newValue;
+  } else if (appStateKey === "itemsListLength") {
+    appState.itemsListLength = newValue;
+  } else if (appStateKey === "selectedItem") {
+    appState.selectedItem = newValue;
+  } else {
   }
 };
 
@@ -298,23 +302,41 @@ const checkAppState = () => {
 };
 
 const changeAppTheme = () => {
-  let themeArray = [
-    {
-      buttonTheme: "buttonTheme1",
-    },
-    {
-      buttonTheme: "buttonTheme2",
-    },
-    {
-      buttonTheme: "buttonTheme3",
-    },
-    {
-      buttonTheme: "buttonTheme4",
-    },
-    {
-      buttonTheme: "buttonTheme5",
-    },
-  ];
+  if (appState.buttonTheme === "buttonTheme1") {
+    setAppState("buttonTheme", "buttonTheme2");
+    setAppState("backgroundTheme", "backgroundTheme2");
+    addThemes();
+  } else if (appState.buttonTheme === "buttonTheme2") {
+    setAppState("buttonTheme", "buttonTheme3");
+    setAppState("backgroundTheme", "backgroundTheme3");
+    addThemes();
+  } else if (appState.buttonTheme === "buttonTheme3") {
+    setAppState("buttonTheme", "buttonTheme4");
+    setAppState("backgroundTheme", "backgroundTheme4");
+    addThemes();
+  } else if (appState.buttonTheme === "buttonTheme4") {
+    setAppState("buttonTheme", "buttonTheme5");
+    setAppState("backgroundTheme", "backgroundTheme5");
+    addThemes();
+  } else if (appState.buttonTheme === "buttonTheme5") {
+    setAppState("buttonTheme", "buttonTheme1");
+    setAppState("backgroundTheme", "backgroundTheme1");
+    addThemes();
+  } else {
+  }
+  console.log(appState.buttonTheme);
+};
+
+const addThemes = () => {
+  buttonArray = document.querySelectorAll("button");
+
+  buttonArray.forEach((button) => {
+    if (button.classList.contains(appState.buttonTheme)) {
+      button.classList.remove(appState.buttonTheme);
+    } else {
+      button.classList.add(appState.buttonTheme);
+    }
+  });
 };
 
 addItemButton.addEventListener("click", addItemToList);
@@ -326,5 +348,7 @@ itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 filterInputComponent.addEventListener("input", filterItems);
 document.addEventListener("DOMContentLoaded", generateItemsList);
+
+console.log(themeButton);
 
 checkAppState();
