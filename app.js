@@ -51,6 +51,8 @@ const appState = {
   buttonTheme: "buttonTheme1",
   itemToEdit: "",
   itemsListLength: getCurrentItemsListLength(),
+  previousBackgroundTheme: "backgroundTheme5",
+  previousButtonTheme: "buttonTheme5",
   selectedItem: "",
 };
 
@@ -63,9 +65,12 @@ const setAppState = (appStateKey, newValue) => {
     appState.itemToEdit = newValue;
   } else if (appStateKey === "itemsListLength") {
     appState.itemsListLength = newValue;
+  } else if (appStateKey === "previousBackgroundTheme") {
+    appState.previousBackgroundTheme = newValue;
+  } else if (appStateKey === "previousButtonTheme") {
+    appState.previousButtonTheme = newValue;
   } else if (appStateKey === "selectedItem") {
     appState.selectedItem = newValue;
-  } else {
   }
 };
 
@@ -304,38 +309,44 @@ const checkAppState = () => {
 const changeAppTheme = () => {
   if (appState.buttonTheme === "buttonTheme1") {
     setAppState("buttonTheme", "buttonTheme2");
+    setAppState("previousButtonTheme", "buttonTheme5");
     setAppState("backgroundTheme", "backgroundTheme2");
+    setAppState("previousBackgroundTheme", "backgroundTheme5");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme2") {
     setAppState("buttonTheme", "buttonTheme3");
+    setAppState("previousButtonTheme", "buttonTheme2");
     setAppState("backgroundTheme", "backgroundTheme3");
+    setAppState("previousBackgroundTheme", "backgroundTheme2");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme3") {
     setAppState("buttonTheme", "buttonTheme4");
+    setAppState("previousButtonTheme", "buttonTheme3");
     setAppState("backgroundTheme", "backgroundTheme4");
+    setAppState("previousBackgroundTheme", "backgroundTheme3");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme4") {
     setAppState("buttonTheme", "buttonTheme5");
+    setAppState("previousButtonTheme", "buttonTheme4");
     setAppState("backgroundTheme", "backgroundTheme5");
+    setAppState("previousBackgroundTheme", "backgroundTheme4");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme5") {
     setAppState("buttonTheme", "buttonTheme1");
+    setAppState("previousButtonTheme", "buttonTheme5");
     setAppState("backgroundTheme", "backgroundTheme1");
+    setAppState("previousBackgroundTheme", "backgroundTheme5");
     addThemes();
   } else {
   }
-  console.log(appState.buttonTheme);
 };
 
 const addThemes = () => {
   buttonArray = document.querySelectorAll("button");
 
   buttonArray.forEach((button) => {
-    if (button.classList.contains(appState.buttonTheme)) {
-      button.classList.remove(appState.buttonTheme);
-    } else {
-      button.classList.add(appState.buttonTheme);
-    }
+    button.classList.remove(appState.previousButtonTheme);
+    button.classList.add(appState.buttonTheme);
   });
 };
 
@@ -348,7 +359,5 @@ itemInputComponent.addEventListener("keydown", addItemToListByKeyBoard);
 itemsList.addEventListener("click", removeItemFromList);
 filterInputComponent.addEventListener("input", filterItems);
 document.addEventListener("DOMContentLoaded", generateItemsList);
-
-console.log(themeButton);
 
 checkAppState();
