@@ -46,12 +46,31 @@ const getCurrentItemsListLength = () => {
   return itemsList.querySelectorAll("li").length;
 };
 
+const getThemesFromStorage = () => {
+  let themesData = [];
+  localStorage.getItem("themesData") !== null
+    ? (themesData = JSON.parse(localStorage.getItem("themesData")))
+    : (themesData = []);
+
+  return themesData;
+};
+
+const getCurrentButtonTheme = () => {
+  let themesData = getThemesFromStorage();
+  return themesData[0];
+};
+
+const getCurrentBackgroundTheme = () => {
+  let themesData = getThemesFromStorage();
+  return themesData[1];
+};
+
 const appState = {
   backgroundTheme: "backgroundTheme1",
-  buttonTheme: "buttonTheme1",
+  buttonTheme: getCurrentButtonTheme(),
   itemToEdit: "",
   itemsListLength: getCurrentItemsListLength(),
-  previousBackgroundTheme: "backgroundTheme5",
+  previousBackgroundTheme: getCurrentBackgroundTheme(),
   previousButtonTheme: "buttonTheme5",
   selectedItem: "",
 };
@@ -183,15 +202,6 @@ const getItemsFromStorage = () => {
     : (itemsData = []);
 
   return itemsData;
-};
-
-const getThemesFromStorage = () => {
-  let themesData = [];
-  localStorage.getItem("themesData") !== null
-    ? (themesData = JSON.parse(localStorage.getItem("themesData")))
-    : (themesData = []);
-
-  return themesData;
 };
 
 const saveItemToStorage = (item) => {
