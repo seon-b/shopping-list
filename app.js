@@ -185,11 +185,32 @@ const getItemsFromStorage = () => {
   return itemsData;
 };
 
+const getThemesFromStorage = () => {
+  let themesData = [];
+  localStorage.getItem("themesData") !== null
+    ? (themesData = JSON.parse(localStorage.getItem("themesData")))
+    : (themesData = []);
+
+  return themesData;
+};
+
 const saveItemToStorage = (item) => {
   let itemsData = getItemsFromStorage();
 
   itemsData.push(item);
   localStorage.setItem("itemsData", JSON.stringify(itemsData));
+};
+
+const saveThemesToStorage = (theme) => {
+  let themesData = getThemesFromStorage();
+
+  if (theme.indexOf("button") !== -1) {
+    themesData[0] = theme;
+    localStorage.setItem("themesData", JSON.stringify(themesData));
+  } else if (theme.indexOf("background") !== -1) {
+    themesData[1] = theme;
+    localStorage.setItem("themesData", JSON.stringify(themesData));
+  }
 };
 
 const removeItemFromList = (e) => {
@@ -309,32 +330,42 @@ const checkAppState = () => {
 const changeAppTheme = () => {
   if (appState.buttonTheme === "buttonTheme1") {
     setAppState("buttonTheme", "buttonTheme2");
+    saveThemesToStorage("buttonTheme2");
     setAppState("previousButtonTheme", "buttonTheme5");
     setAppState("backgroundTheme", "backgroundTheme2");
+    saveThemesToStorage("backgroundTheme2");
     setAppState("previousBackgroundTheme", "backgroundTheme5");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme2") {
     setAppState("buttonTheme", "buttonTheme3");
+    saveThemesToStorage("buttonTheme3");
     setAppState("previousButtonTheme", "buttonTheme2");
     setAppState("backgroundTheme", "backgroundTheme3");
+    saveThemesToStorage("backgroundTheme3");
     setAppState("previousBackgroundTheme", "backgroundTheme2");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme3") {
     setAppState("buttonTheme", "buttonTheme4");
+    saveThemesToStorage("buttonTheme4");
     setAppState("previousButtonTheme", "buttonTheme3");
     setAppState("backgroundTheme", "backgroundTheme4");
+    saveThemesToStorage("backgroundTheme4");
     setAppState("previousBackgroundTheme", "backgroundTheme3");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme4") {
     setAppState("buttonTheme", "buttonTheme5");
+    saveThemesToStorage("buttonTheme5");
     setAppState("previousButtonTheme", "buttonTheme4");
     setAppState("backgroundTheme", "backgroundTheme5");
+    saveThemesToStorage("backgroundTheme5");
     setAppState("previousBackgroundTheme", "backgroundTheme4");
     addThemes();
   } else if (appState.buttonTheme === "buttonTheme5") {
     setAppState("buttonTheme", "buttonTheme1");
+    saveThemesToStorage("buttonTheme1");
     setAppState("previousButtonTheme", "buttonTheme5");
     setAppState("backgroundTheme", "backgroundTheme1");
+    saveThemesToStorage("backgroundTheme1");
     setAppState("previousBackgroundTheme", "backgroundTheme5");
     addThemes();
   } else {
