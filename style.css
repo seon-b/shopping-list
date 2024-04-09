@@ -17,7 +17,7 @@
   border-radius: 10px;
   padding: 0.75em;
   margin: 100px auto;
-  max-width: 230px;
+  max-width: 260px;
 }
 
 .appTitle {
@@ -95,24 +95,29 @@ input {
 
 .buttonTheme1 {
   background-color: #97dffc;
+  border-color: #97dffc;
   color: #ffff;
 }
 
 .buttonTheme2 {
   background-color: #b892ff;
+  border-color: #b892ff;
   color: #ffff;
 }
 
 .buttonTheme3 {
   background-color: #ffc2e2;
+  border-color: #ffc2e2;
   color: #ffff;
 }
 .buttonTheme4 {
   background-color: #17a5a3;
+  border-color: #17a5a3;
   color: #ffff;
 }
 .buttonTheme5 {
   background-color: #d8315b;
+  border-color: #d8315b;
   color: #ffff;
 }
 
