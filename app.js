@@ -66,8 +66,8 @@ const getCurrentBackgroundTheme = () => {
 };
 
 const appState = {
-  backgroundTheme: "backgroundTheme1",
-  buttonTheme: getCurrentButtonTheme(),
+  backgroundTheme: getCurrentBackgroundTheme || "backgroundTheme1",
+  buttonTheme: getCurrentButtonTheme() || "buttonTheme1",
   itemToEdit: "",
   itemsListLength: getCurrentItemsListLength(),
   previousBackgroundTheme: getCurrentBackgroundTheme(),
