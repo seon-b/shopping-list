@@ -66,7 +66,7 @@ const getCurrentBackgroundTheme = () => {
 };
 
 const appState = {
-  backgroundTheme: getCurrentBackgroundTheme || "backgroundTheme1",
+  backgroundTheme: getCurrentBackgroundTheme() || "backgroundTheme1",
   buttonTheme: getCurrentButtonTheme() || "buttonTheme1",
   itemToEdit: "",
   itemsListLength: getCurrentItemsListLength(),
@@ -154,6 +154,7 @@ const addItemToList = () => {
   saveItemToStorage(formatInput(itemInputComponent.value.trim()));
   setAppState("itemsListLength", getCurrentItemsListLength());
   checkAppState();
+  addThemes();
   itemInputComponent.value = "";
 };
 
@@ -187,6 +188,7 @@ const addItemToListByKeyBoard = (e) => {
       saveItemToStorage(formatInput(itemInputComponent.value));
       setAppState("itemsListLength", getCurrentItemsListLength());
       checkAppState();
+      addThemes();
 
       itemInputComponent.value = "";
     } else {
@@ -383,11 +385,17 @@ const changeAppTheme = () => {
 };
 
 const addThemes = () => {
-  buttonArray = document.querySelectorAll("button");
+  let buttonArray = document.querySelectorAll("button");
+  let itemArray = document.querySelectorAll("li");
 
   buttonArray.forEach((button) => {
     button.classList.remove(appState.previousButtonTheme);
     button.classList.add(appState.buttonTheme);
+  });
+
+  itemArray.forEach((listItem) => {
+    listItem.classList.remove(appState.previousButtonTheme);
+    listItem.classList.add(appState.buttonTheme);
   });
 };
 
