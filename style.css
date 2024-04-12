@@ -15,6 +15,7 @@
 .appContainer {
   /* border: black solid 2px; 
   border-radius: 10px;*/
+  /* background-color: whitesmoke; */
   padding: 0.75em;
   margin: 100px auto;
   max-width: 260px;
@@ -91,19 +92,21 @@ input {
 /* App Themes*/
 .buttonTheme1 {
   background-color: #97dffc;
-  border-color: lightgrey;
+  border-color: #808588;
   color: #ffff;
 }
 
 .buttonTheme2 {
-  background-color: #b892ff;
-  border-color: lightgrey;
+  /* background-color: #b892ff; */
+  /* background-color: #b666d2; */
+  background-color: #db91ef;
+  border-color: #808588;
   color: #ffff;
 }
 
 .buttonTheme3 {
   background-color: #ffc2e2;
-  border-color: lightgrey;
+  border-color: #808588;
   color: #ffff;
 }
 
