@@ -13,8 +13,8 @@
 }
 
 .appContainer {
-  border: black solid 2px;
-  border-radius: 10px;
+  /* border: black solid 2px; 
+  border-radius: 10px;*/
   padding: 0.75em;
   margin: 100px auto;
   max-width: 260px;
@@ -42,11 +42,6 @@ button:hover {
 
 .displayComponent {
   display: block;
-}
-
-.editItem {
-  background-color: lightgray;
-  color: white;
 }
 
 .formContainer {
@@ -84,7 +79,7 @@ input {
 
 .shoppingItem {
   align-items: center;
-  border: 2px solid grey;
+  border: 2px solid lightgrey;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
@@ -93,31 +88,34 @@ input {
   width: 100%;
 }
 
+/* App Themes*/
 .buttonTheme1 {
   background-color: #97dffc;
-  border-color: #97dffc;
+  border-color: lightgrey;
   color: #ffff;
 }
 
 .buttonTheme2 {
   background-color: #b892ff;
-  border-color: #b892ff;
+  border-color: lightgrey;
   color: #ffff;
 }
 
 .buttonTheme3 {
   background-color: #ffc2e2;
-  border-color: #ffc2e2;
+  border-color: lightgrey;
   color: #ffff;
 }
+
 .buttonTheme4 {
   background-color: #17a5a3;
-  border-color: #17a5a3;
+  border-color: black;
   color: #ffff;
 }
+
 .buttonTheme5 {
   background-color: #d8315b;
-  border-color: #d8315b;
+  border-color: black;
   color: #ffff;
 }
 
@@ -137,4 +135,18 @@ input {
 }
 .backgroundTheme5 {
   background-color: #4dd831;
+}
+
+.lightBorder {
+  border-color: lightgrey;
+}
+
+.darkBorder {
+  border-color: black;
+}
+
+.editItem {
+  background-color: lightgray;
+  color: white;
+  font-size: 1.2em;
 }
