@@ -6,6 +6,7 @@ let themeButton = document.querySelector(".changeTheme");
 let itemInputComponent = document.querySelector("#addItem");
 let filterInputComponent = document.querySelector("#filterItems");
 let itemsList = document.querySelector(".itemsList");
+let appTitle = document.querySelector(".appTitle");
 
 let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
 
@@ -397,6 +398,9 @@ const addThemes = () => {
     listItem.classList.remove(appState.previousButtonTheme);
     listItem.classList.add(appState.buttonTheme);
   });
+
+  appTitle.classList.remove(appState.previousButtonTheme);
+  appTitle.classList.add(appState.buttonTheme);
 };
 
 addItemButton.addEventListener("click", addItemToList);
