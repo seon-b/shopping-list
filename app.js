@@ -8,7 +8,7 @@ let filterInputComponent = document.querySelector("#filterItems");
 let itemsList = document.querySelector(".itemsList");
 let appTitle = document.querySelector(".appTitle");
 
-let removeItemIconClasses = "material-symbols-outlined removeItemIconStyle";
+let removeItemIconClasses = "bi bi-file-x removeItemIconStyle";
 
 const generateItemsList = () => {
   let itemsData = getItemsFromStorage();
@@ -95,11 +95,8 @@ const setAppState = (appStateKey, newValue) => {
 };
 
 const createItemIcon = (iconClasses) => {
-  let newItemIcon = document.createElement("span");
-  let newItemIconName = document.createTextNode("close");
-
+  let newItemIcon = document.createElement("i");
   newItemIcon.className = iconClasses;
-  newItemIcon.appendChild(newItemIconName);
 
   return newItemIcon;
 };
