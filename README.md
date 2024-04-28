@@ -9,3 +9,7 @@ This web app enables users to create shopping lists. Users can add, remove, and 
   [Window: localStorage property](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - App state is managed using a global object
 - List items can be filtered
+
+### Project Demo
+
+https://shopping-list-app2.netlify.app/
